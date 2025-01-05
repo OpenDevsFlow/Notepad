@@ -1,0 +1,35 @@
+body {
+  font-family: monospace; /* Simulate Notepad's font */
+  margin: 0;
+  padding: 0;
+  background-color: #f0f0f0; /* Light gray background */
+}
+
+#notepad {
+  width: 80%;
+  height: 80%;
+  margin: 10px auto;
+  padding: 10px;
+  border: 1px solid #ccc;
+  font-family: monospace;
+  resize: both; /* Allow resizing */
+  overflow: auto; /* Add scrollbars if needed */
+}
+
+.toolbar {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.toolbar button {
+  padding: 5px 10px;
+  margin: 0 5px;
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+}
