@@ -10,8 +10,8 @@ body {
 }
 
 #notepad {
-  width: 80%; 
-  height: 80%; 
+  width: 150%; 
+  height: 150%; 
   max-width: 800px; /* Set maximum width for larger screens */
   max-height: 600px; /* Set maximum height for larger screens */
   margin: 10px;
