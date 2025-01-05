@@ -1,6 +1,7 @@
 const notepad = document.getElementById('notepad');
 const saveButton = document.getElementById('save');
 const clearButton = document.getElementById('clear');
+const fullscreenButton = document.getElementById('fullscreen');
 
 saveButton.addEventListener('click', () => {
   const text = notepad.value;
@@ -17,19 +18,10 @@ clearButton.addEventListener('click', () => {
   notepad.value = '';
 });
 
-//Optional: Load text from a file (requires user interaction)
-
-// document.getElementById('load').addEventListener('click', () => {
-//   const fileInput = document.createElement('input');
-//   fileInput.type = 'file';
-//   fileInput.accept = '.txt';
-//   fileInput.addEventListener('change', (event) => {
-//     const file = event.target.files[0];
-//     const reader = new FileReader();
-//     reader.onload = (e) => {
-//       notepad.value = e.target.result;
-//     };
-//     reader.readAsText(file);
-//   });
-//   fileInput.click();
-// })
+fullscreenButton.addEventListener('click', () => {
+  if (document.fullscreenElement) {
+    document.exitFullscreen();
+  } else {
+    notepad.requestFullscreen(); 
+  }
+});
