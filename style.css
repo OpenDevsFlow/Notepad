@@ -65,31 +65,7 @@ body {
 }
 
 #preview {
-  margin-top: 10px;
-  padding: 10px;
-  border: 1px solid #ccc;
-  width: 500px; 
-  height: 300px; 
-  overflow-y: auto;
-}
-
-/* Dark Theme Styles */
-body.dark-theme {
-  background-color: #222;
-  color: #eee;
-}
-
-#notepad.dark-theme {
-  border-color: #444;
-}
-
-#line-numbers.dark-theme {
-  background-color: #333;
-  color: #aaa;
-}
-
-#preview {
-  display: none; /* Initially hide the preview */
+  display: none; 
   position: fixed;
   top: 50%;
   left: 50%;
@@ -100,5 +76,5 @@ body.dark-theme {
   width: 80%;
   max-height: 80%;
   overflow: auto;
-  z-index: 9999;
+  z-index: 9999; 
 }
