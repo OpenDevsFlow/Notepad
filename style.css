@@ -6,8 +6,8 @@ body {
     align-items: center;
     min-height: 100vh;
     font-size: 16px;
-    background-color: #f0f0f0; /* Default background */
-    color: #333; /* Default text color */
+    background-color: #f0f0f0;
+    color: #333;
     box-sizing: border-box;
 }
 
@@ -33,7 +33,8 @@ body {
     box-sizing: border-box;
 }
 
-.toolbar button, .toolbar select {
+.toolbar button,
+.toolbar select {
     padding: 5px 10px;
     border: none;
     cursor: pointer;
@@ -75,8 +76,9 @@ body {
     resize: none;
     overflow: auto;
     box-sizing: border-box;
-    background-color: inherit; /* inherit from body */
+    background-color: transparent;
     color: inherit;
+    white-space: pre-wrap;
 }
 
 #preview {
@@ -85,8 +87,10 @@ body {
     overflow: auto;
     border-left: 1px solid #ccc;
     box-sizing: border-box;
-    background-color: white; /* Default preview background */
-    color: black; /* Default preview text color */
+    background-color: white;
+    color: black;
+    word-wrap: break-word;
+    white-space: pre-wrap;
 }
 
 #preview.hidden {
@@ -124,7 +128,8 @@ body {
     border-bottom-color: #555;
 }
 
-.theme-dark #editor, .theme-dark #preview {
+.theme-dark #editor,
+.theme-dark #preview {
     background-color: #222;
     color: #eee;
 }
@@ -145,10 +150,17 @@ body {
     color: #93a1a1;
 }
 
-.theme-solarized-light #editor, .theme-solarized-light #preview {
+.theme-solarized-light .toolbar {
+    background-color: #eee8d5;
+    border-bottom-color: #93a1a1;
+}
+
+.theme-solarized-light #editor,
+.theme-solarized-light #preview {
     background-color: #fdf6e3;
     color: #586e75;
 }
+
 .theme-solarized-light .status-bar {
     background-color: #eee8d5;
     border-top-color: #93a1a1;
@@ -165,10 +177,17 @@ body {
     color: #586e75;
 }
 
-.theme-solarized-dark #editor, .theme-solarized-dark #preview {
+.theme-solarized-dark .toolbar {
+    background-color: #073642;
+    border-bottom-color: #586e75;
+}
+
+.theme-solarized-dark #editor,
+.theme-solarized-dark #preview {
     background-color: #002b36;
     color: #839496;
 }
+
 .theme-solarized-dark .status-bar {
     background-color: #073642;
     border-top-color: #586e75;
@@ -185,7 +204,13 @@ body {
     color: #75715E;
 }
 
-.theme-monokai #editor, .theme-monokai #preview {
+.theme-monokai .toolbar {
+    background-color: #383830;
+    border-bottom-color: #75715E;
+}
+
+.theme-monokai #editor,
+.theme-monokai #preview {
     background-color: #272822;
     color: #f8f8f2;
 }
