@@ -75,11 +75,15 @@ function updateCharCount() {
 }
 
 function updatePreview() {
-    if (isPreviewVisible) {
-        preview.innerHTML = marked(editor.value);
+    // Correct way to use marked:
+    preview.innerHTML = marked.parse(editor.value);
+
+    if (!isPreviewVisible) {
+        preview.classList.add('hidden');
+    } else {
+        preview.classList.remove('hidden');
     }
 }
-
 updateLineNumbers();
 updateWordCount();
 updateCharCount();
