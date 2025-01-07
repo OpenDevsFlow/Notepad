@@ -9,16 +9,15 @@ const wordCountDisplay = document.getElementById('word-count');
 const themeButton = document.getElementById('theme');
 const previewBtn = document.getElementById('previewBtn');
 const previewWindow = document.createElement('div');
-previewWindow.id = 'preview'; // Assign the same ID to the dynamically created element
-
-document.body.appendChild(previewWindow); // Append the preview window to the body
+previewWindow.id = 'preview'; 
+document.body.appendChild(previewWindow); 
 
 let undoStack = [];
 let redoStack = [];
 
 notepad.addEventListener('input', () => {
   undoStack.push(notepad.value);
-  redoStack = [];
+  redoStack = []; 
   updateLineNumbers();
   updateWordCount();
 });
