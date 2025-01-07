@@ -7,7 +7,11 @@ const undoButton = document.getElementById('undo');
 const redoButton = document.getElementById('redo');
 const wordCountDisplay = document.getElementById('word-count');
 const themeButton = document.getElementById('theme');
-const preview = document.getElementById('preview');
+const previewBtn = document.getElementById('previewBtn');
+const previewWindow = document.createElement('div');
+previewWindow.id = 'preview'; // Assign the same ID to the dynamically created element
+
+document.body.appendChild(previewWindow); // Append the preview window to the body
 
 let undoStack = [];
 let redoStack = [];
@@ -17,7 +21,6 @@ notepad.addEventListener('input', () => {
   redoStack = [];
   updateLineNumbers();
   updateWordCount();
-  updatePreview();
 });
 
 undoButton.addEventListener('click', () => {
@@ -26,7 +29,6 @@ undoButton.addEventListener('click', () => {
     notepad.value = undoStack.pop();
     updateLineNumbers();
     updateWordCount();
-    updatePreview();
   }
 });
 
@@ -36,7 +38,6 @@ redoButton.addEventListener('click', () => {
     notepad.value = redoStack.pop();
     updateLineNumbers();
     updateWordCount();
-    updatePreview();
   }
 });
 
@@ -55,7 +56,6 @@ clearButton.addEventListener('click', () => {
   notepad.value = '';
   updateLineNumbers();
   updateWordCount();
-  updatePreview();
 });
 
 fullscreenButton.addEventListener('click', () => {
@@ -72,6 +72,13 @@ themeButton.addEventListener('click', () => {
   lineNumbers.classList.toggle('dark-theme');
 });
 
+previewBtn.addEventListener('click', () => {
+  const markdownText = notepad.value;
+  const htmlText = marked(markdownText);
+  previewWindow.innerHTML = htmlText;
+  previewWindow.style.display = 'block'; 
+});
+
 function updateLineNumbers() {
   const lines = notepad.value.split('\n');
   let lineNumberHTML = '';
@@ -86,12 +93,5 @@ function updateWordCount() {
   wordCountDisplay.textContent = `Word Count: ${words.length}`;
 }
 
-function updatePreview() {
-  const markdownText = notepad.value;
-  const htmlText = marked(markdownText);
-  preview.innerHTML = htmlText;
-}
-
 updateLineNumbers();
 updateWordCount();
-updatePreview();
