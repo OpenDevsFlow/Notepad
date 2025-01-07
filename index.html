@@ -1,23 +1,37 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Enhanced Notepad</title>
-  <link rel="stylesheet" href="style.css">
-  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script> 
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enhanced Notepad</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </head>
 <body>
-  <div id="line-numbers"></div>
-  <textarea id="notepad"></textarea>
-  <div id="word-count">Word Count: 0</div>
-  <div class="toolbar">
-    <button id="save">Save</button>
-    <button id="clear">Clear</button>
-    <button id="fullscreen">Fullscreen</button>
-    <button id="undo">Undo</button>
-    <button id="redo">Redo</button>
-    <button id="theme">Theme</button>
-    <button id="previewBtn">Preview</button>
-  </div>
-  <script src="script.js"></script>
+    <div class="container">
+        <div class="toolbar">
+            <button id="save">Save</button>
+            <button id="clear">Clear</button>
+            <button id="fullscreen">Fullscreen</button>
+            <select id="theme-select">
+                <option value="light">Light</option>
+                <option value="dark">Dark</option>
+                <option value="solarized-light">Solarized Light</option>
+                <option value="solarized-dark">Solarized Dark</option>
+                <option value="monokai">Monokai</option>
+            </select>
+            <button id="preview-toggle">Preview</button>
+        </div>
+        <div class="editor-container">
+            <div id="line-numbers"></div>
+            <textarea id="editor"></textarea>
+            <div id="preview" class="hidden"></div>
+        </div>
+        <div class="status-bar">
+            <span id="word-count">Words: 0</span>
+            <span id="char-count">Characters: 0</span>
+        </div>
+    </div>
+    <script src="script.js"></script>
 </body>
 </html>
