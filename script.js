@@ -47,7 +47,7 @@ fullscreenButton.addEventListener('click', () => {
 
 themeSelect.addEventListener('change', () => {
     const selectedTheme = themeSelect.value;
-    document.body.className = '';
+    document.body.className = ''; // Clear all existing classes
     if (selectedTheme !== 'light') {
         document.body.classList.add(`theme-${selectedTheme}`);
     }
@@ -65,7 +65,8 @@ function updateLineNumbers() {
 }
 
 function updateWordCount() {
-    const words = editor.value.trim().split(/\s+/).filter(Boolean);
+    const text = editor.value;
+    const words = text.trim().split(/\s+/).filter(Boolean);
     wordCountDisplay.textContent = `Words: ${words.length}`;
 }
 
