@@ -1,96 +1,85 @@
-const notepad = document.getElementById('notepad');
+const editor = document.getElementById('editor');
 const lineNumbers = document.getElementById('line-numbers');
 const saveButton = document.getElementById('save');
 const clearButton = document.getElementById('clear');
 const fullscreenButton = document.getElementById('fullscreen');
-const undoButton = document.getElementById('undo');
-const redoButton = document.getElementById('redo');
 const wordCountDisplay = document.getElementById('word-count');
-const themeButton = document.getElementById('theme');
-const previewBtn = document.getElementById('previewBtn');
-const previewWindow = document.createElement('div');
-previewWindow.id = 'preview'; 
-document.body.appendChild(previewWindow); 
+const charCountDisplay = document.getElementById('char-count');
+const themeSelect = document.getElementById('theme-select');
+const previewToggle = document.getElementById('preview-toggle');
+const preview = document.getElementById('preview');
 
-let undoStack = [];
-let redoStack = [];
+let isPreviewVisible = false;
 
-notepad.addEventListener('input', () => {
-  undoStack.push(notepad.value);
-  redoStack = []; 
-  updateLineNumbers();
-  updateWordCount();
-});
-
-undoButton.addEventListener('click', () => {
-  if (undoStack.length > 0) {
-    redoStack.push(notepad.value);
-    notepad.value = undoStack.pop();
+editor.addEventListener('input', () => {
     updateLineNumbers();
     updateWordCount();
-  }
-});
-
-redoButton.addEventListener('click', () => {
-  if (redoStack.length > 0) {
-    undoStack.push(notepad.value);
-    notepad.value = redoStack.pop();
-    updateLineNumbers();
-    updateWordCount();
-  }
+    updateCharCount();
+    updatePreview();
 });
 
 saveButton.addEventListener('click', () => {
-  const text = notepad.value;
-  const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = 'notepad.txt';
-  a.click();
-  URL.revokeObjectURL(url);
+    const text = editor.value;
+    const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'notepad.txt';
+    a.click();
+    URL.revokeObjectURL(url);
 });
 
 clearButton.addEventListener('click', () => {
-  notepad.value = '';
-  updateLineNumbers();
-  updateWordCount();
+    editor.value = '';
+    updateLineNumbers();
+    updateWordCount();
+    updateCharCount();
+    updatePreview();
 });
 
 fullscreenButton.addEventListener('click', () => {
-  if (document.fullscreenElement) {
-    document.exitFullscreen();
-  } else {
-    notepad.requestFullscreen();
-  }
+    if (document.fullscreenElement) {
+        document.exitFullscreen();
+    } else {
+        editor.requestFullscreen();
+    }
 });
 
-themeButton.addEventListener('click', () => {
-  document.body.classList.toggle('dark-theme');
-  notepad.classList.toggle('dark-theme');
-  lineNumbers.classList.toggle('dark-theme');
+themeSelect.addEventListener('change', () => {
+    const selectedTheme = themeSelect.value;
+    document.body.className = '';
+    if (selectedTheme !== 'light') {
+        document.body.classList.add(`theme-${selectedTheme}`);
+    }
 });
 
-previewBtn.addEventListener('click', () => {
-  const markdownText = notepad.value;
-  const htmlText = marked(markdownText);
-  previewWindow.innerHTML = htmlText;
-  previewWindow.style.display = 'block'; 
+previewToggle.addEventListener('click', () => {
+    isPreviewVisible = !isPreviewVisible;
+    preview.classList.toggle('hidden');
+    updatePreview();
 });
 
 function updateLineNumbers() {
-  const lines = notepad.value.split('\n');
-  let lineNumberHTML = '';
-  for (let i = 0; i < lines.length; i++) {
-    lineNumberHTML += `<div>${i + 1}</div>`;
-  }
-  lineNumbers.innerHTML = lineNumberHTML;
+    const lines = editor.value.split('\n');
+    lineNumbers.innerHTML = lines.map((_, i) => `<div>${i + 1}</div>`).join('');
 }
 
 function updateWordCount() {
-  const words = notepad.value.trim().split(/\s+/).filter(Boolean);
-  wordCountDisplay.textContent = `Word Count: ${words.length}`;
+    const words = editor.value.trim().split(/\s+/).filter(Boolean);
+    wordCountDisplay.textContent = `Words: ${words.length}`;
+}
+
+function updateCharCount() {
+    charCountDisplay.textContent = `Characters: ${editor.value.length}`;
+}
+
+function updatePreview() {
+    if (isPreviewVisible) {
+        preview.innerHTML = marked(editor.value);
+    }
 }
 
 updateLineNumbers();
 updateWordCount();
+updateCharCount();
+updatePreview();
